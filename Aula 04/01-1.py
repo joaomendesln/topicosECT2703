@@ -4,11 +4,8 @@ T1 = TypeVar('T1')
 
 def elemRepet(l:List[T1]) -> bool:
 	'''Checa se uma lista tem algum elemento repetido'''
-	for (i,v) in enumerate(l):
-		if v in l[:i] + l[i+1:]:
-			return True
 
-	return False
+	return True if len(l) > len(set(l)) else False
 
 print(elemRepet([1,2,3,1]))
 print(elemRepet([1,2,2,3]))
