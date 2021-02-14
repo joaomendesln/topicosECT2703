@@ -1,6 +1,7 @@
 separarEm :: Int -> [v] -> ([v],[v])
 separarEm 0 l      = ([],l)
-separarEm n (x:xs) = ((x:(fst (separarEm (n - 1) xs))), snd (separarEm (n - 1) xs))
+separarEm n (x:xs) = (x:l1, l2)
+ where (l1, l2) = separarEm (n - 1) xs
 
 -- separarEm :: Int -> [v] -> ([v],[v])
 -- separarEm n l = separarEmRec n l ([],[])
