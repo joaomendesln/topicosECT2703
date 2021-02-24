@@ -16,7 +16,7 @@ def meu_unzip(l: List[Tuple[T1,T2]]) -> Tuple[List[T1],List[T2]]:
 
 l = [(1,2),(3,4),(5,6),(7,8)]
 
-i = (a[0] for a in l)
-j = (a[1] for a in l)
+result = ([x for (x,_) in l], [y for (_,y) in l])
 
-print((list(i), list(j)))
+print(meu_unzip(l))
+print(result)

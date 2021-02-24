@@ -1,4 +1,4 @@
-from typing import Iterable, Iterator, TypeVar
+from typing import Iterable, Iterator, TypeVar, List
 
 T1 = TypeVar('T1')
 
@@ -7,14 +7,13 @@ def elementos_da_lista(c:Iterable[Iterable[T1]]) -> Iterator[T1]:
 	while True:
 		try:
 			g = next(i)
-			h = iter(g)
 			for x in g:
-				yield next(h)
+				yield x
 		except StopIteration:
 			return
 
 
-l = [[1,2,3],[4,5],[],[6,7]]
+l : List[List[int]] = [[1,2,3],[4,5],[],[6,7]]
 
 print(list(elementos_da_lista(l)))
 
