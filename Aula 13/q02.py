@@ -1,6 +1,12 @@
-from functools import reduce
-import operator
+import csv
 
-l = [4,6,1,3,8,6,9,0]
+def filtra_pais(arquivo, pais):
+	'''Retona os registro de apenas um determinado país'''
+	with open(arquivo) as csvfile:
+		cr = csv.reader(csvfile)
+		_ = next(cr)
+		for x in cr:
+			if x[2] == pais:
+				yield(x)
 
-print(reduce(operator.add,l[0::2]))
+print([x for x in filtra_pais('owid-covid-data-topicos.csv', 'Brazil')])

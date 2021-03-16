@@ -1,5 +1,10 @@
 from datetime import date
 import csv
+from functools import reduce
+
+def maior (x,y):
+	'''Retorna tupla que tem o maior segundo elemento'''
+	return x if x[1] > y[1] else y
 
 def para_int(s):
 	return 0 if s == '' else int(s)
@@ -17,5 +22,4 @@ def novos_casos_dia(arquivo, pais):
 
 result = [x for x in novos_casos_dia('owid-covid-data-topicos.csv', 'Brazil')]
 
-for x in result:
-	print(f'{x[0]} ---> {x[1]}')
+print(reduce(maior, result))

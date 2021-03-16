@@ -1,8 +1,20 @@
-def mais_quatro_car(s:str) -> bool:
-	return len(s) > 4
+import csv
 
-l1 = ["lorem", "ipsum", "dolor", "sit", "amet"]
-l2 = ["lorem", "ipsum", "dolor"]
+def para_int(s):
+	return 0 if s == '' else int(s)
 
-print(all(map(mais_quatro_car, l1)))
-print(all(map(mais_quatro_car, l2)))
+def novos_casos_dia(arquivo, pais):
+	'''Retona uma tupla com o dia e quantidade de casos novos de um pais'''
+	with open(arquivo) as csvfile:
+		cr = csv.reader(csvfile)
+		_ = next(cr)
+		for x in cr:
+			if x[2] == pais:
+				yield(x[3], para_int(x[5]))
+			elif pais == '':
+				yield(x[3], para_int(x[5]))
+
+result = [x for x in novos_casos_dia('owid-covid-data-topicos.csv', 'Brazil')]
+
+for x in result:
+	print(f'{x[0]} ---> {x[1]}')
