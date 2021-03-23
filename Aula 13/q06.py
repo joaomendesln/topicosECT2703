@@ -1,21 +1,23 @@
-from datetime import date
-import csv
-import operator
-from functools import reduce
+from q04 import *
 
-def para_int(s):
-	return 0 if s == '' else int(s)
-
-def novos_casos_dia_continente(arquivo, data, continente):
-	'''Retona uma tupla com o dia e quantidade de casos novos de um pais do mês atual'''
-	with open(arquivo) as csvfile:
-		cr = csv.reader(csvfile)
-		_ = next(cr)
-		for x in cr:
+def novos_casos_dia(data, i):
+	while True:
+		try:
+			x = next(i)
 			if date.fromisoformat(x[3]) == date.fromisoformat(data):
-				if x[1] == continente:
-					yield(para_int(x[5]))
+				yield x
+		except StopIteration:
+			return
 
-print(reduce(operator.add, [x for x in novos_casos_dia_continente('owid-covid-data-topicos.csv', '2021-01-01', 'Asia')]))
+def novos_casos_dia_continente(continente, i):
+	while True:
+		try:
+			x = next(i)
+			if x[1] == continente:
+				yield x
+		except StopIteration:
+			return
 
-print(reduce(operator.add, [x for x in novos_casos_dia_continente('owid-covid-data-topicos.csv', '2021-02-02', 'Europe')]))
+if __name__ == "__main__":
+	print(sum([para_int(x[5]) for x in novos_casos_dia('2021-01-01', novos_casos_dia_continente('Asia', lerDados('owid-covid-data-topicos.csv')))]))
+	print(sum([para_int(x[5]) for x in novos_casos_dia_continente('Europe', novos_casos_dia('2021-02-02', lerDados('owid-covid-data-topicos.csv')))]))

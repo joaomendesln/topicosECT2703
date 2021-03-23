@@ -1,12 +1,13 @@
-import csv
+from ler_dados import lerDados
 
-def filtra_pais(arquivo, pais):
-	'''Retona os registro de apenas um determinado país'''
-	with open(arquivo) as csvfile:
-		cr = csv.reader(csvfile)
-		_ = next(cr)
-		for x in cr:
-			if x[2] == pais:
-				yield(x)
+def so_no_Brasil(i):
+	while True:
+		try:
+			x = next(i)
+			if x[2] == "Brazil":
+				yield x
+		except StopIteration:
+			return
 
-print([x for x in filtra_pais('owid-covid-data-topicos.csv', 'Brazil')])
+if __name__ == "__main__":
+	print([x for x in so_no_Brasil(lerDados('owid-covid-data-topicos.csv'))])
