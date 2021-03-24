@@ -1,8 +1,8 @@
 def dif(i):
-	b = 0
+	b = ''
 	while True:
 		try:
-			a = next(i) if b == 0 else b
+			a = next(i) if b == '' else b
 			b = next(i)
 			yield b - a
 		except StopIteration:
